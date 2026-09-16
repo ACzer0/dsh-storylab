@@ -1,0 +1,63 @@
+{
+  "version": 2,
+  "title": "大肥鱼与两碗饭",
+  "start_node_id": "opening",
+  "role_prompt": "你是一只蓝色大肥鱼，饥肠辘辘，在街上寻找食物。请以这只鱼的身份做出选择。",
+  "memo": "新版示例：分支自带发生的内容，不再创建与选项重复的剧情节点。导演决定路人送什么，AI 决定如何回应。",
+  "nodes": [
+    {
+      "id": "opening",
+      "title": "饥饿的街头",
+      "actor": "auto",
+      "text": "你是一只蓝色大肥鱼，饥肠辘辘，在街上乱逛试图找点吃的。这时，一个端着两碗饭的路人走了过来。",
+      "next": "food",
+      "pos": { "x": 0, "y": 0 }
+    },
+    {
+      "id": "food",
+      "title": "路人的赠与",
+      "actor": "director",
+      "text": "",
+      "prompt": "他给了大肥鱼什么吃的？",
+      "author_note": "只决定路人的行为。选中的分支内容直接成为世界事实；这里的提问和备注不会送给 AI。",
+      "choices": [
+        {
+          "id": "rice",
+          "text": "他拿出了一碗白饭。你看到他手里还有另一碗吃的，是红烧肉。",
+          "foreshadowing": true,
+          "author_note": "路人留下的另一碗饭可作为之后回应的线索。",
+          "next": "reply"
+        },
+        {
+          "id": "meat",
+          "text": "他拿出了一碗红烧肉，自己手里只剩一碗白饭。看来他把配菜给了你，自己只留下了主食。",
+          "next": "reply"
+        }
+      ],
+      "pos": { "x": 0, "y": 240 }
+    },
+    {
+      "id": "reply",
+      "title": "大肥鱼的回应",
+      "actor": "ai",
+      "text": "路人把碗递到你面前，等着你的回应。",
+      "prompt": "你要说什么？",
+      "choices": [
+        {
+          "id": "another",
+          "text": "给我另一份吧，我想要另一个。",
+          "result": "路人愣了一下，看看手里的饭，又看看你，最后把另一碗也递了过来。",
+          "next": null
+        },
+        {
+          "id": "thanks",
+          "text": "谢谢你，我就想要这个。",
+          "result": "好心人笑了笑，把所有食物全给了你。你捧着两碗热饭，觉得今天的街道格外温暖。",
+          "foreshadowing_recovery_hint": true,
+          "next": null
+        }
+      ],
+      "pos": { "x": 0, "y": 560 }
+    }
+  ]
+}

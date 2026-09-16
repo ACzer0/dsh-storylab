@@ -1,0 +1,36 @@
+# dsh-storylab bundle patch。
+#
+# 这一层只做一件事：把 Story Lab 插件插进 profile 的 loader 树。
+# 用户在 ~/.dsh/profiles/<name>/cordis.patch.yml 里的补丁会在本层之后应用，
+# 因此用户可以用 `- id: storylab` + `config:` 覆盖下面的默认配置。
+#
+# 注意：本文件是「bundle 补丁」，不是用户补丁层。`dsh plugin add` 会把本包追加进
+# profile 的 dsh.profile.bundles，从而应用这一层。
+
+- insert:
+    - id: storylab
+      name: dsh-storylab
+      config:
+        # 复用 DSH 已配置的 DeepSeek 官方路由；可用 /storylab models 查看实际可用的 provider/model。
+        provider: deepseek-official
+        model: deepseek-v4-flash
+        # 剧本目录与运行日志目录：这里刻意**不写**绝对路径。
+        # 默认值是 <插件包>/stories 与 <插件包>/runs —— 相对插件包自己（由 import.meta.url 推出），
+        # 既与启动 dsh 时的 cwd 无关，也与 clone 到哪个路径无关，换台机器照样能用。
+        # 想把剧本和插件分开放，在 ~/.dsh/profiles/web/cordis.patch.yml 里覆盖（用户补丁层在本层之后应用）：
+        #   - id: storylab
+        #     config:
+        #       storyDir: 'D:/我的剧本'
+        #       runLogDir: 'D:/我的日志'
+        # AI 抉择的输出上限。
+        maxOutputTokens: 512
+        # 内心独白的输出上限，必须与抉择分开：独白要先"想"再"说"，而这个模型的思考过程
+        # 动辄几百 token。共用 512 时实测会把想法截断（output=512 / reasoning=474），
+        # 甚至思考吃光全部额度、可见文本为空。觉得想法还是偏短就继续调大这里。
+        monologueMaxTokens: 2000
+        temperature: 0.7
+        # 伏笔/调试：把每局的可见历史与最终 prompt 也写进 run log。
+        logPrompt: true
+        # 旁观者设定：告诉模型"读到你行动的人不会替你做决定、也不是作者"。
+        # 这是本项目的核心实验设定，默认开启；改成 false 即可做 A/B 对照。
+        observerFraming: true

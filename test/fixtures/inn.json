@@ -1,0 +1,173 @@
+{
+  "version": 1,
+  "title": "老客栈的雨夜",
+  "start_node_id": "story_001",
+  "memo": "Story Lab 的内置测试剧本：一条导演分支 + 一次收束 + 两次 AI 抉择 + 两个伏笔。",
+  "nodes": [
+    {
+      "id": "story_001",
+      "type": "story",
+      "text": "雨下得很大，你推门走进老客栈。店里只有一盏油灯，店主趴在柜台上打盹。",
+      "author_note": "开场只交代事实，不暗示今晚会不会出事。",
+      "pos": { "x": 0, "y": 0 },
+      "next": "director_001"
+    },
+    {
+      "id": "director_001",
+      "type": "director_choice",
+      "text": "今晚，这座客栈里实际上发生了什么？",
+      "author_note": "真人在这里决定世界线；AI 永远不会知道这里存在一个选择。SECRET-ANNOTATION-MARKER-DIRECTOR",
+      "pos": { "x": 0, "y": 140 },
+      "choices": [
+        {
+          "id": "quiet_night",
+          "text": "一夜无事。雨声里什么也没发生。",
+          "next": "story_002"
+        },
+        {
+          "id": "theft",
+          "text": "有人趁你睡着翻走了你行囊里的钱袋。",
+          "next": "story_003"
+        }
+      ]
+    },
+    {
+      "id": "story_002",
+      "type": "story",
+      "text": "你睡得很沉。天亮时雨停了，窗纸透着灰白的光。",
+      "pos": { "x": -220, "y": 280 },
+      "next": "story_004"
+    },
+    {
+      "id": "story_003",
+      "type": "story",
+      "text": "凌晨时分你被一阵轻微的响动惊醒，摸到枕边时，行囊的系带是松开的。",
+      "pos": { "x": 220, "y": 280 },
+      "next": "story_004"
+    },
+    {
+      "id": "story_004",
+      "type": "story",
+      "text": "你下楼。店主正在擦一只早就干净的杯子，抬头看你时眼神很快移开了。",
+      "author_note": "两条世界线在这里收束：不管走哪条，店主都会躲闪。",
+      "foreshadowing": true,
+      "pos": { "x": 0, "y": 420 },
+      "next": "ai_001"
+    },
+    {
+      "id": "ai_001",
+      "type": "ai_choice",
+      "text": "你打算怎么做？",
+      "author_note": "第一次 AI 抉择：三个选项分别通向质问、观察、离开。",
+      "pos": { "x": 0, "y": 560 },
+      "choices": [
+        {
+          "id": "question_innkeeper",
+          "text": "走到柜台前，直接问店主昨晚有谁来过。",
+          "next": "story_005"
+        },
+        {
+          "id": "inspect_counter",
+          "text": "装作看菜单，绕到柜台侧面观察柜台后面。",
+          "next": "story_006"
+        },
+        {
+          "id": "leave",
+          "text": "什么都不说，推门走进雨里。",
+          "next": "story_007"
+        }
+      ]
+    },
+    {
+      "id": "story_005",
+      "type": "story",
+      "text": "店主的抹布停了半拍。他说昨晚没人来过，声音比刚才低了些。",
+      "pos": { "x": -320, "y": 700 },
+      "next": "director_002"
+    },
+    {
+      "id": "story_006",
+      "type": "story",
+      "text": "柜台下面露出一截深色的带子，末端打了你熟悉的结。",
+      "author_note": "第二个伏笔：钱袋带子。只在这条分支可见。",
+      "foreshadowing": true,
+      "pos": { "x": 0, "y": 700 },
+      "next": "director_002"
+    },
+    {
+      "id": "story_007",
+      "type": "story",
+      "text": "你走进雨里。身后的客栈还亮着那盏灯，隔着雨幕看不清里面的人。",
+      "pos": { "x": 320, "y": 700 },
+      "next": "ending_001"
+    },
+    {
+      "id": "director_002",
+      "type": "director_choice",
+      "text": "店主到底是什么人？",
+      "author_note": "第二次导演分支：决定真相的深度。SECRET-ANNOTATION-MARKER-DIRECTOR2",
+      "pos": { "x": 0, "y": 840 },
+      "choices": [
+        {
+          "id": "ordinary_thief",
+          "text": "他只是个怕事的小贼，没有别的东西。",
+          "next": "story_008"
+        },
+        {
+          "id": "cult_member",
+          "text": "他袖口内侧有一枚印记，你半年前在城里见过同样的图案。",
+          "next": "story_009"
+        }
+      ]
+    },
+    {
+      "id": "story_008",
+      "type": "story",
+      "text": "他的手指在围裙上蹭了又蹭，终于承认自己拿过东西，也承认自己后悔了。",
+      "pos": { "x": -180, "y": 980 },
+      "next": "ai_002"
+    },
+    {
+      "id": "story_009",
+      "type": "story",
+      "text": "你想起那枚印记：半年前城里有人因为它消失过。店主的左手一直收在袖子里。",
+      "foreshadowing_recovery_hint": true,
+      "pos": { "x": 180, "y": 980 },
+      "next": "ai_002"
+    },
+    {
+      "id": "ai_002",
+      "type": "ai_choice",
+      "text": "现在你要怎么处理这件事？",
+      "pos": { "x": 0, "y": 1120 },
+      "choices": [
+        {
+          "id": "press",
+          "text": "把话挑明，逼他把知道的都说出来。",
+          "next": "ending_002"
+        },
+        {
+          "id": "let_go",
+          "text": "拿了该拿的，转身离开。",
+          "next": "ending_001"
+        }
+      ]
+    },
+    {
+      "id": "ending_001",
+      "type": "story",
+      "text": "结局：雨夜客栈。你带着一个没有答案的清晨上路了。",
+      "author_note": "通用结局，两条路径都能到。",
+      "pos": { "x": 300, "y": 1260 },
+      "next": null
+    },
+    {
+      "id": "ending_002",
+      "type": "story",
+      "text": "结局：真相的一角。他讲了一个你宁可没听过的故事。",
+      "foreshadowing_recovery_hint": true,
+      "pos": { "x": -100, "y": 1260 },
+      "next": null
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "name": "dsh-storylab",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "description": "Story Lab：DSH 内的节点式互动剧本插件（预写分支 + 真人隐藏导演 + AI 受限选择）",
+  "main": "lib/index.js",
+  "exports": {
+    ".": {
+      "types": "./lib/index.d.ts",
+      "default": "./lib/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib",
+    "public",
+    "cordis.patch.yml",
+    "stories"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "engines": {
+    "node": ">=22.19"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "watch": "tsc -w -p tsconfig.json",
+    "test": "node --experimental-strip-types test/selftest.ts && node test/smoke.mjs && node test/webtest.mjs && node test/story-v2.mjs && node test/frontend.mjs",
+    "selftest": "node --experimental-strip-types test/selftest.ts",
+    "webtest": "node test/webtest.mjs",
+    "frontend": "node test/frontend.mjs"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "typescript": "^5.7.0"
+  }
+}

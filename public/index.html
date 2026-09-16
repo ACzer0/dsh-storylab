@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <meta name="theme-color" content="#101322"/>
+  <title>Story Lab · 故事工坊</title>
+  <link rel="stylesheet" href="/storylab/app.css"/>
+</head>
+<body class="mode-play">
+  <header id="topbar">
+    <div class="brand-area"><span class="brand-mark" aria-hidden="true">✦</span><div><strong>Story Lab</strong><small>故事工坊</small></div>
+      <nav class="modes" aria-label="工作区">
+        <button id="mode-play" class="seg on">体验故事</button><button id="mode-edit" class="seg">创作剧本</button>
+      </nav>
+      <span id="token-meter" class="token-meter" role="status" aria-live="off" title=""></span>
+    </div>
+    <div class="controls">
+      <select id="story-select" aria-label="选择剧本"></select>
+      <button id="btn-load" class="ghost">打开</button>
+      <button id="btn-new" class="ghost">新建剧本</button>
+      <button id="btn-map" class="ghost play-only">叙事地图</button>
+      <details class="more-controls"><summary aria-label="更多操作">•••</summary><div class="more-menu">
+        <label>打开其他位置的剧本<input id="story-path" type="text" placeholder="D:/…/story.json"/></label>
+        <button id="btn-path" class="ghost">打开此路径</button>
+        <button id="btn-spike" class="ghost">测试模型连接</button>
+        <button id="btn-refresh" class="ghost">刷新状态</button>
+      </div></details>
+    </div>
+  </header>
+  <div id="banner" class="hidden" role="status" aria-live="polite"></div>
+  <main>
+    <aside id="outline-pane" class="edit-only panel">
+      <div class="pane-heading"><div><p class="eyebrow">SCENES</p><h2>场景目录</h2></div><span id="node-count" class="hint"></span></div>
+      <div class="outline-search"><input id="node-search" type="text" placeholder="搜索场景或内容…" aria-label="搜索场景"/></div>
+      <div id="node-list" class="scroll"></div>
+      <p class="pane-tip">从场景或分支的圆点拖出连线。<br/>拖到空白处，创建下一幕。</p>
+    </aside>
+    <section id="play-view" class="play-only reader">
+      <header class="reader-heading"><div><p class="eyebrow">YOUR STORY</p><h1 id="play-title">让一个故事开始。</h1><p id="play-meta" class="hint"></p></div><button id="btn-start" class="ghost">重新开始</button></header>
+      <div class="reader-scroll">
+        <div id="visible-history" class="narrative"></div>
+        <section id="board" class="decision" aria-live="polite">
+          <p class="eyebrow" id="board-kicker">NEXT SCENE</p>
+          <h2 id="board-title"></h2><div id="board-text" class="board-text"></div>
+          <div id="board-options" class="board-options"></div>
+        </section>
+      </div>
+    </section>
+    <section id="pane-graph" class="canvas-pane">
+      <header class="pane-heading graph-heading"><div><p class="eyebrow">STORY MAP</p><h2>叙事地图</h2><p id="graph-hint" class="hint">包括所有分支，仅供导演查看</p></div>
+        <div class="graph-tools"><button id="btn-zoom-out" class="ghost tiny" aria-label="缩小">−</button><button id="btn-zoom-in" class="ghost tiny" aria-label="放大">+</button><button id="btn-zoom-fit" class="ghost tiny">适应</button></div>
+      </header>
+      <div id="graph-wrap"><svg id="graph" aria-label="拖拽连接剧情场景"></svg><div id="canvas-empty" class="canvas-empty hidden"></div></div>
+      <div id="edge-toolbar" class="edge-toolbar hidden"></div>
+    </section>
+    <aside id="play-sidebar" class="play-only panel">
+      <div class="pane-heading"><div><p class="eyebrow">THREADS</p><h2>伏笔线索</h2></div></div>
+      <div class="scroll"><div id="foreshadow"></div><section id="ai-panel" class="ai-panel"></section></div>
+    </aside>
+    <aside id="editor-sidebar" class="edit-only panel">
+      <div class="sidebar-tabs"><button id="tab-node" class="on">场景属性</button><button id="tab-story">剧本设置</button></div>
+      <div id="inspector" class="scroll"></div><div id="settings" class="scroll hidden"></div>
+    </aside>
+  </main>
+  <footer id="bottom" class="edit-only">
+    <div class="editor-actions">
+      <button id="add-story" class="ghost">＋ 叙述场景</button><button id="add-monologue" class="ghost" title="停下把上下文交给 AI，让它以主角身份说一段此刻的想法">＋ 内心独白</button><button id="add-director" class="ghost">＋ 导演场景</button><button id="add-ai" class="ghost">＋ AI 场景</button>
+      <span class="editor-sep"></span><button id="btn-undo" class="ghost" title="Ctrl+Z">撤销</button><button id="btn-redo" class="ghost" title="Ctrl+Shift+Z">重做</button>
+      <button id="btn-autolayout" class="ghost">整理画布</button><span class="toolbar-spacer"></span>
+      <span id="save-state" class="hint"></span><button id="btn-save-as" class="ghost">另存为</button><button id="btn-save" class="primary">保存剧本</button><button id="btn-test" class="ghost">体验这一版</button>
+    </div>
+    <div id="editor-status" class="editor-status" aria-live="polite"></div>
+  </footer>
+  <dialog id="modal"><div id="modal-content"></div></dialog>
+  <script type="module" src="/storylab/app.js"></script>
+</body>
+</html>

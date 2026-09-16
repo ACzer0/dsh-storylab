@@ -1,0 +1,26 @@
+# 依赖与构建产物
+node_modules/
+lib/
+*.tsbuildinfo
+
+# 运行时日志：每局一份 JSONL
+runs/
+
+# 剧本目录由使用者自己填。作者的创作不进版本控制，只留一个占位文件让目录存在。
+stories/*
+!stories/.gitkeep
+
+# 编辑器保存时的单代备份；.backup/ 是本机 profile 配置的备份
+*.bak
+.backup/
+
+# 本地 npm 缓存与日志
+.npm-cache/
+*.log
+
+# 编辑器与系统垃圾
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini

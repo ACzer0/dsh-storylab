@@ -1,0 +1,106 @@
+{
+  "version": 1,
+  "title": "测试：三岔路口",
+  "start_node_id": "开头",
+  "memo": "最小测试剧本：1 个导演分支 + 1 次合流 + 1 次 AI 抉择 + 1 个伏笔 + 2 个结局。故意不写 pos，用来验证自动布局。",
+  "nodes": [
+    {
+      "id": "开头",
+      "type": "story",
+      "text": "你是一只蓝色大肥鱼，你饥肠辘辘，在街上乱逛试图找点吃的，这时一个路人路过。",
+      "author_note": "开场只交代事实，不暗示桥的状态。",
+      "next": "抉择",
+      "pos": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "抉择",
+      "type": "director_choice",
+      "text": "他给了大肥鱼什么吃的？",
+      "author_note": "真人在这里决定世界线；AI 不知道这里存在一个选择。",
+      "choices": [
+        {
+          "id": "白饭",
+          "text": "他拿出了一碗白饭，但此时你看到他手里还有另一个吃的，是红烧肉",
+          "next": "bridge_scene"
+        },
+        {
+          "id": "红烧肉",
+          "text": "他拿出了一碗红烧肉，但他手里只剩一碗白饭了，看来他把配菜给了你，自己只留下了主食",
+          "next": "river_scene"
+        }
+      ],
+      "pos": {
+        "x": 0,
+        "y": 150
+      }
+    },
+    {
+      "id": "bridge_scene",
+      "type": "story",
+      "text": "他拿出了一碗白饭，但此时你看到他手里还有另一个吃的，是红烧肉",
+      "author_note": "伏笔：锯痕。只在「桥还在」这条世界线里可见。",
+      "foreshadowing": true,
+      "next": "ai_1",
+      "pos": {
+        "x": -130,
+        "y": 300
+      }
+    },
+    {
+      "id": "river_scene",
+      "type": "story",
+      "text": "他拿出了一碗红烧肉，但他手里只剩一碗白饭了，看来他把配菜给了你，自己只留下了主食",
+      "author_note": "两条世界线在这里收束：不管桥在不在，都会走到 ai_1。",
+      "next": "ai_1",
+      "pos": {
+        "x": 130,
+        "y": 300
+      }
+    },
+    {
+      "id": "ai_1",
+      "type": "ai_choice",
+      "text": "你要说什么？",
+      "author_note": "第一次 AI 抉择：一个前进、一个后退。",
+      "choices": [
+        {
+          "id": "forward",
+          "text": "给我另一份吧，我想要另一个",
+          "next": "end_forward"
+        },
+        {
+          "id": "back",
+          "text": "谢谢你，我就想要这个",
+          "next": "end_back"
+        }
+      ],
+      "pos": {
+        "x": 0,
+        "y": 450
+      }
+    },
+    {
+      "id": "end_forward",
+      "type": "story",
+      "text": "好心人又给了你一碗白饭",
+      "next": null,
+      "pos": {
+        "x": 130,
+        "y": 600
+      }
+    },
+    {
+      "id": "end_back",
+      "type": "story",
+      "text": "好心人笑了笑，把所有食物全给了你",
+      "next": null,
+      "pos": {
+        "x": -130,
+        "y": 600
+      }
+    }
+  ]
+}
